@@ -22,6 +22,19 @@ stages:
     - bash: echo $(Build.SourcesDirectory)
     - bash: ls -R $(System.DefaultWorkingDirectory)
     - bash: echo $(Build.ArtifactStagingDirectroy)
+    - bash: java -version
+    - bash: node --version
+    - bash: Python --version
+    - bash: mvn --version
+    - bash: ls -R $(Build.ArtifactStagingDirectroy)
+    - task: CopyFiles@2
+      inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)'
+      Contents: |
+        **.yml
+        **.tf
+      TargetFolder: '$(Build.ArtifactStagingDirectroy)'
+    - bash: ls -R $(Build.ArtifactStagingDirectroy)
   # - job: secondjob 
   #   steps:
   #   - bash: echo build secondjob
